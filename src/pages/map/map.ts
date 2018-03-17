@@ -17,8 +17,7 @@ declare var google: any;
 export class MapPage {
 
   @ViewChild('mapCanvas') mapElement: ElementRef;
-  constructor(private afAuth: AngularFireAuth, private toast: ToastController,
-    public confData: ConferenceData, public platform: Platform) {
+  constructor(public confData: ConferenceData, public platform: Platform) {
   }
 
   ionViewWillLoad() {
@@ -57,6 +56,11 @@ export class MapPage {
   
 }
 /** add toast to verify user
+ * 
+ *   @ViewChild('mapCanvas') mapElement: ElementRef;
+  constructor(private afAuth: AngularFireAuth, private toast: ToastController,
+
+    
 this.afAuth.authState.subscribe(data => {
   if (data.email && data.uid) {
   this.toast.create({
