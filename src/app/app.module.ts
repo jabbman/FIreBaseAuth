@@ -19,15 +19,22 @@ import { MapPage } from '../pages/map/map';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
 import { SessionDetailPage } from '../pages/session-detail/session-detail';
-import { SignupPage } from '../pages/signup/signup';
+
 import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
 import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
+import { RegisterPage } from '../pages/register/register';
+
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { FIREBASE_CONFIG } from './app.firebase.config';
+
 
 
 @NgModule({
@@ -41,12 +48,12 @@ import { UserData } from '../providers/user-data';
     SchedulePage,
     ScheduleFilterPage,
     SessionDetailPage,
-    SignupPage,
     SpeakerDetailPage,
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -65,9 +72,11 @@ import { UserData } from '../providers/user-data';
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' }
+        { component: RegisterPage, name: 'RegisterPage', segment: 'register' }
       ]
     }),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireAuthModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -76,12 +85,12 @@ import { UserData } from '../providers/user-data';
     AboutPage,
     AccountPage,
     LoginPage,
+    RegisterPage,
     MapPage,
     PopoverPage,
     SchedulePage,
     ScheduleFilterPage,
     SessionDetailPage,
-    SignupPage,
     SpeakerDetailPage,
     SpeakerListPage,
     TabsPage,

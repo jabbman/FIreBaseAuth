@@ -9,7 +9,7 @@ import { AboutPage } from '../pages/about/about';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
-import { SignupPage } from '../pages/signup/signup';
+import { RegisterPage } from '../pages/register/register';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SchedulePage } from '../pages/schedule/schedule';
@@ -55,9 +55,9 @@ export class ConferenceApp {
   loggedOutPages: PageInterface[] = [
     { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-    { title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add' }
+    { title: 'Register', name: 'RegisterPage', component: RegisterPage, icon: 'person-add' }
   ];
-  rootPage: any;
+  rootPage: any = LoginPage;
 
   constructor(
     public events: Events,
@@ -129,7 +129,7 @@ export class ConferenceApp {
       this.enableMenu(true);
     });
 
-    this.events.subscribe('user:signup', () => {
+    this.events.subscribe('user:register', () => {
       this.enableMenu(true);
     });
 

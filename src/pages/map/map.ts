@@ -4,6 +4,8 @@ import { ConferenceData } from '../../providers/conference-data';
 
 import { Platform } from 'ionic-angular';
 
+import {  ToastController } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 declare var google: any;
 
@@ -15,11 +17,12 @@ declare var google: any;
 export class MapPage {
 
   @ViewChild('mapCanvas') mapElement: ElementRef;
-  constructor(public confData: ConferenceData, public platform: Platform) {
+  constructor(private afAuth: AngularFireAuth, private toast: ToastController,
+    public confData: ConferenceData, public platform: Platform) {
   }
 
-  ionViewDidLoad() {
-
+  ionViewWillLoad() {
+  
       this.confData.getMap().subscribe((mapData: any) => {
         let mapEle = this.mapElement.nativeElement;
 
@@ -51,4 +54,20 @@ export class MapPage {
       });
 
   }
+  
 }
+/** add toast to verify user
+this.afAuth.authState.subscribe(data => {
+  if (data.email && data.uid) {
+  this.toast.create({
+      message: 'Welcome to APP_NAME, ${data.email}',
+      duration: 5000
+  }).present();
+} 
+else {
+  this.toast.create({
+    message: 'No Authentication Details',
+    duration:5000
+}).present();
+
+*/

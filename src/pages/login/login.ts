@@ -1,36 +1,43 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { User } from '../../models/user';
+import { AngularFireAuth } from 'angularfire2/auth';
+/**
+ * Generated class for the LoginPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
-import { NavController } from 'ionic-angular';
-
-import { UserData } from '../../providers/user-data';
-
-import { UserOptions } from '../../interfaces/user-options';
-
-import { TabsPage } from '../tabs-page/tabs-page';
-import { SignupPage } from '../signup/signup';
-
-
+@IonicPage()
 @Component({
-  selector: 'page-user',
-  templateUrl: 'login.html'
+  selector: 'page-login',
+  templateUrl: 'login.html',
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
-  submitted = false;
 
-  constructor(public navCtrl: NavController, public userData: UserData) { }
-
-  onLogin(form: NgForm) {
-    this.submitted = true;
-
-    if (form.valid) {
-      this.userData.login(this.login.username);
-      this.navCtrl.push(TabsPage);
-    }
+  user = {} as User; 
+  
+  constructor(private afAuth: AngularFireAuth,
+    public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  onSignup() {
-    this.navCtrl.push(SignupPage);
+  async login(user: User) {
+   try {
+
+    const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+    if(result) {
+    this.navCtrl.setRoot('Map');
   }
+ }
+
+catch (e) {
+  console.error(e); 
+
+  }
+}
+ register() {
+
+  this.navCtrl.push('RegisterPage');
+ }
 }
