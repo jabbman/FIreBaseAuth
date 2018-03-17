@@ -3,10 +3,10 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ConferenceData } from '../../providers/conference-data';
 
 import { Platform } from 'ionic-angular';
-
+/**  use when auth works
 import {  ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-
+*/
 declare var google: any;
 
 
